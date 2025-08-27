@@ -1,5 +1,6 @@
 // crates/scrubkit-core/src/lib.rs
 
+pub mod jpeg;
 use thiserror::Error;
 
 /// A universal error type for all scrubbing operations.
