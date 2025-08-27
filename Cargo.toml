@@ -1,0 +1,6 @@
+# scrubkit/Cargo.toml
+[workspace]
+members = ["crates/scrubkit-core", "crates/scrubkit-cli", "crates/scrubkit-web"]
+
+[workspace.dependencies]
+# We can define shared dependencies here later
