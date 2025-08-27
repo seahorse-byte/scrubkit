@@ -1,4 +1,5 @@
-ScrubKit 🧼✨
+# ScrubKit 🧼✨
+
 A modern, privacy-first tool to view and remove sensitive metadata from your files. Built with Rust and WebAssembly for performance and security.
 
 ScrubKit allows you to easily view and remove potentially sensitive metadata—like GPS location, camera details, and author information—from files before you share them.
