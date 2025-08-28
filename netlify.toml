@@ -5,6 +5,3 @@ command = "cargo install dioxus-cli --force && dx build --release --platform web
 
 # as determined by the Dioxus CLI's default behavior.
 publish = "target/dx/scrubkit-web/release/web/public"
-
-[build.environment]
-RUST_VERSION = "1.78"
