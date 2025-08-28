@@ -2,7 +2,7 @@
 
 use anyhow::{Context, Result};
 use clap::Parser;
-use scrubkit_core::{Scrubber, scrubber_for_file};
+use scrubkit_core::scrubber_for_file;
 use std::path::PathBuf;
 
 /// A tool to view and remove potentially sensitive metadata from files.
@@ -65,7 +65,6 @@ async fn main() -> Result<()> {
                 .await
                 .with_context(|| format!("Failed to read file: {}", file_path.display()))?;
 
-            // Use the factory function here as well
             let scrubber = scrubber_for_file(file_bytes)?;
             let result = scrubber.scrub()?;
 
