@@ -8,7 +8,7 @@ edition = "2024"
 scrubkit-core = { path = "../scrubkit-core" }
 
 # The Dioxus UI framework and web renderer
-dioxus = "0.5.1"
+dioxus = { version = "0.5.1", features = ["web"] }
 dioxus-web = "0.5.1"
 
 # For interacting with browser APIs

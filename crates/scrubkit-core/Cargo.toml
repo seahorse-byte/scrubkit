@@ -6,3 +6,4 @@ edition = "2024"
 [dependencies]
 thiserror = "1.0"
 nom-exif = "2.5.4"
+png = "0.17"       # for PNG support

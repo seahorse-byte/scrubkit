@@ -2,7 +2,7 @@
 
 use anyhow::{Context, Result};
 use clap::Parser;
-use scrubkit_core::{Scrubber, jpeg::JpegScrubber};
+use scrubkit_core::{Scrubber, scrubber_for_file};
 use std::path::PathBuf;
 
 /// A tool to view and remove potentially sensitive metadata from files.
@@ -39,13 +39,12 @@ async fn main() -> Result<()> {
 
     match cli.command {
         Commands::View { file_path } => {
-            // Read the file into memory
             let file_bytes = tokio::fs::read(&file_path)
                 .await
                 .with_context(|| format!("Failed to read file: {}", file_path.display()))?;
 
-            // For now, we assume JPEG. We will add file type detection later.
-            let scrubber = JpegScrubber::new(file_bytes)?;
+            // Use the factory function to get the correct scrubber
+            let scrubber = scrubber_for_file(file_bytes)?;
             let metadata = scrubber.view_metadata()?;
 
             if metadata.is_empty() {
@@ -57,17 +56,17 @@ async fn main() -> Result<()> {
                 }
             }
         }
+
         Commands::Clean {
             file_path,
             in_place,
         } => {
-            // Read the file into memory
             let file_bytes = tokio::fs::read(&file_path)
                 .await
                 .with_context(|| format!("Failed to read file: {}", file_path.display()))?;
 
-            // Perform the scrub operation
-            let scrubber = JpegScrubber::new(file_bytes)?;
+            // Use the factory function here as well
+            let scrubber = scrubber_for_file(file_bytes)?;
             let result = scrubber.scrub()?;
 
             if result.metadata_removed.is_empty() {
@@ -75,7 +74,6 @@ async fn main() -> Result<()> {
                 return Ok(());
             }
 
-            // Determine the output path
             let output_path = if in_place {
                 file_path.clone()
             } else {
@@ -83,15 +81,15 @@ async fn main() -> Result<()> {
                     .file_stem()
                     .and_then(|s| s.to_str())
                     .unwrap_or("file");
+
                 let extension = file_path
                     .extension()
                     .and_then(|s| s.to_str())
-                    .unwrap_or("jpg");
+                    .unwrap_or("bin");
                 let new_file_name = format!("{}.clean.{}", original_name, extension);
                 file_path.with_file_name(new_file_name)
             };
 
-            // Write the cleaned file to the output path
             tokio::fs::write(&output_path, result.cleaned_file_bytes)
                 .await
                 .with_context(|| {
