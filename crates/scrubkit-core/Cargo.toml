@@ -5,4 +5,4 @@ edition = "2024"
 
 [dependencies]
 thiserror = "1.0"
-exif = "0.5.5"
+nom-exif = "2.5.4"

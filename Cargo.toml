@@ -1,5 +1,6 @@
 # scrubkit/Cargo.toml
 [workspace]
+resolver = "2"
 members = ["crates/scrubkit-core", "crates/scrubkit-cli", "crates/scrubkit-web"]
 
 [workspace.dependencies]
