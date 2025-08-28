@@ -1,6 +1,6 @@
 [package]
 name = "scrubkit"                                                          # or "scrubkit-core"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 authors = ["Olsi Gjeci <olsi.developer@gamil.com>"]
 description = "A modern, privacy-first metadata scrubber built with Rust."
