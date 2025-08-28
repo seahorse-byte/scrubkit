@@ -4,4 +4,16 @@ resolver = "2"
 members = ["crates/scrubkit-core", "crates/scrubkit-cli", "crates/scrubkit-web"]
 
 [workspace.dependencies]
+
+[profile]
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.android-dev]
+inherits = "dev"
 # We can define shared dependencies here later

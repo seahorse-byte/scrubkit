@@ -4,3 +4,18 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+# Our core logic library
+scrubkit-core = { path = "../scrubkit-core" }
+
+# The Dioxus UI framework and web renderer
+dioxus = "0.5.1"
+dioxus-web = "0.5.1"
+
+# For interacting with browser APIs
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = ["Blob", "Url", "HtmlAnchorElement"] }
+
+# For easy logging in the browser console
+wasm-logger = "0.2"
+log = "0.4"

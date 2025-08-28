@@ -3,4 +3,13 @@ name = "scrubkit-cli"
 version = "0.1.0"
 edition = "2024"
 
+
 [dependencies]
+# Our core logic library
+scrubkit-core = { path = "../scrubkit-core" }
+# For building the command-line interface
+clap = { version = "4.5.4", features = ["derive"] }
+# For easy and robust error handling
+anyhow = "1.0.82"
+# For asynchronous file operations
+tokio = { version = "1.37.0", features = ["fs", "macros", "rt-multi-thread"] }
