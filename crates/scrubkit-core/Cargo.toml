@@ -2,6 +2,14 @@
 name = "scrubkit-core"
 version = "0.1.0"
 edition = "2024"
+authors = ["Olsi Gjeci <olsi.developer@gamil.com>"]
+description = "A modern, privacy-first metadata scrubber built with Rust."
+license = "MIT"
+repository = "https://github.com/seahorse-byte/scrubkit.git"
+homepage = "https://github.com/seahorse-byte/scrubkit.git"
+readme = "README.md"
+keywords = ["exif", "metadata", "privacy", "scrubber", "cli"]
+categories = ["command-line-utilities", "privacy"]
 
 [dependencies]
 thiserror = "1.0"

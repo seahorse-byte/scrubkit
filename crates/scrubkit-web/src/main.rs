@@ -96,15 +96,16 @@ fn app() -> Element {
                         "viewBox": "0 0 24 24",
                         "fill": "none",
                         "stroke": "currentColor",
-                        "stroke-width": "1",
+                        "stroke-width": "1.5",
                         "stroke-linecap": "round",
                         "stroke-linejoin": "round",
-                        path { d: "M21 8.5C21 9.92 20.04 11.23 18.71 11.72C18.71 11.72 16 12.5 16 12.5C14.6 12.5 13.5 11.4 13.5 10C13.5 8.6 14.6 7.5 16 7.5C16 7.5 18.71 8.28 18.71 8.28C20.04 8.77 21 10.08 21 11.5Z", stroke: "none", fill: "currentColor" }
-                        path { d: "M3.5 8.5C3.5 9.92 3.96 11.23 5.29 11.72C5.29 11.72 8 12.5 8 12.5C9.4 12.5 10.5 11.4 10.5 10C10.5 8.6 9.4 7.5 8 7.5C8 7.5 5.29 8.28 5.29 8.28C3.96 8.77 3.5 10.08 3.5 11.5Z", stroke: "none", fill: "currentColor" }
-                        path { d: "M12 2L12 22" }
-                        path { d: "M22 12L2 12" }
-                        path { d: "M19 19L5 5" }
-                        path { d: "M5 19L19 5" }
+                        path { d: "M12 2L2 7V17L12 22L22 17V7L12 2Z" }
+                        path { d: "M2 7L12 12L22 7" }
+                        path { d: "M12 22V12" }
+                        path { d: "M17 4.5L7 9.5", "stroke-width": "1", opacity: "0.5" }
+                        path { d: "M20 7L10 12", "stroke-width": "1", opacity: "0.5" }
+                        circle { cx: "12", cy: "12", r: "3", fill: "#f87171", stroke: "none", opacity: "0.8" }
+                        path { d: "M10.5 13.5L13.5 10.5", stroke: "#111827", "stroke-width": "1.5" }
                     },
                     h1 { class: "text-5xl font-bold text-gray-100 font-orbitron", "ScrubKit" }
                     p { class: "text-green-400 mt-2", "[ View and Anonymize File Metadata ]" }
