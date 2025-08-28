@@ -1,12 +1,10 @@
-# File: netlify.toml
-
 [build]
-# The command to build our Dioxus app
-command = "cd crates/scrubkit-web && dx build --release"
+# This is the command Netlify will run from the root of your repository.
+# It installs the CLI and then builds the `ephemeral_web` package.
+command = "cargo install dioxus-cli --force && dx build --release --platform web --package crates/scrubkit-web"
 
-# The directory where the built files are placed
-publish = "crates/scrubkit-web/dist"
+# as determined by the Dioxus CLI's default behavior.
+publish = "target/dx/scrubkit-web/release/web/public"
 
 [build.environment]
-# Set the Rust version Netlify should use
 RUST_VERSION = "1.78"
