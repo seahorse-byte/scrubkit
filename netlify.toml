@@ -1,0 +1,12 @@
+# File: netlify.toml
+
+[build]
+# The command to build our Dioxus app
+command = "cd crates/scrubkit-web && dx build --release"
+
+# The directory where the built files are placed
+publish = "crates/scrubkit-web/dist"
+
+[build.environment]
+# Set the Rust version Netlify should use
+RUST_VERSION = "1.78"
