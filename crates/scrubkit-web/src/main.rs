@@ -45,6 +45,144 @@ fn download_bytes(file_name: &str, bytes: &[u8]) {
     web_sys::Url::revoke_object_url(&url).unwrap();
 }
 
+// fn app() -> Element {
+//     let mut file_bytes = use_signal(|| None::<(String, Vec<u8>)>);
+//     let mut app_state = use_signal(|| AppState::Idle);
+
+//     // This effect runs whenever `file_bytes` changes
+//     use_effect(move || {
+//         if let Some((name, bytes)) = file_bytes() {
+//             log::info!("File loaded: {}, size: {}", name, bytes.len());
+//             match JpegScrubber::new(bytes) {
+//                 Ok(scrubber) => match scrubber.view_metadata() {
+//                     Ok(metadata) => {
+//                         app_state.set(AppState::Loaded {
+//                             file_name: name,
+//                             metadata,
+//                         });
+//                     }
+//                     Err(e) => app_state.set(AppState::Error(e.to_string())),
+//                 },
+//                 Err(e) => app_state.set(AppState::Error(e.to_string())),
+//             }
+//         }
+//     });
+
+//     let handle_file_upload = move |evt: FormEvent| async move {
+//         if let Some(file_engine) = &evt.files() {
+//             let files = file_engine.files();
+//             if let Some(file_name) = files.first() {
+//                 if let Some(file) = file_engine.read_file(file_name).await {
+//                     file_bytes.set(Some((file_name.clone(), file)));
+//                 }
+//             }
+//         }
+//     };
+
+//     rsx! {
+//         div {
+//             class: "min-h-screen bg-gray-100 flex items-center justify-center p-4",
+//             div {
+//                 class: "max-w-2xl w-full bg-white rounded-lg shadow-xl p-8 space-y-6",
+//                 // Header
+//                 div {
+//                     class: "text-center",
+//                     h1 { class: "text-4xl font-bold text-gray-800", "ScrubKit" }
+//                     p { class: "text-gray-500 mt-2", "View and remove metadata with privacy." }
+//                 }
+
+//                 // File Input
+//                 div {
+//                     class: "flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg",
+//                     p { class: "text-gray-600 mb-4", "Select a JPEG file to get started" }
+//                     label {
+//                         class: "file-input-button",
+//                         "Select File"
+//                         input {
+//                             r#type: "file",
+//                             class: "hidden",
+//                             accept: ".jpg, .jpeg",
+//                             oninput: handle_file_upload,
+//                         }
+//                     }
+//                 }
+
+//                 // Main Content Area
+//                 match app_state() {
+//                     AppState::Idle => {
+//                         rsx! { p { class: "text-center text-gray-500", "Your file's metadata will appear here." } }
+//                     },
+//                     AppState::Loaded { file_name, metadata } => {
+//                         rsx! {
+//                             div {
+//                                 class: "space-y-4",
+//                                 h3 { class: "text-xl font-semibold text-gray-700", "Metadata for ", span { class: "font-mono", "{file_name}" } }
+//                                 if metadata.is_empty() {
+//                                     p { "No metadata found." }
+//                                 } else {
+//                                     ul {
+//                                         class: "list-disc list-inside bg-gray-50 p-4 rounded-md max-h-60 overflow-y-auto",
+//                                         for entry in metadata {
+//                                             li { class: "font-mono text-sm",
+//                                                 span { class: "font-semibold", "{entry.key}: " }
+//                                                 "{entry.value}"
+//                                             }
+//                                         }
+//                                     }
+//                                 }
+//                                 button {
+//                                     class: "w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition",
+//                                     onclick: move |_| {
+//                                         if let Some((name, bytes)) = file_bytes() {
+//                                             if let Ok(scrubber) = JpegScrubber::new(bytes) {
+//                                                 if let Ok(result) = scrubber.scrub() {
+//                                                     app_state.set(AppState::Scrubbed {
+//                                                         file_name: name,
+//                                                         cleaned_bytes: result.cleaned_file_bytes,
+//                                                         metadata_removed: result.metadata_removed,
+//                                                     });
+//                                                 }
+//                                             }
+//                                         }
+//                                     },
+//                                     "Scrub Metadata"
+//                                 }
+//                             }
+//                         }
+//                     },
+//                     AppState::Scrubbed { file_name, cleaned_bytes, metadata_removed } => {
+//                         rsx! {
+//                             div {
+//                                 class: "p-4 bg-green-100 border border-green-400 text-green-700 rounded-md text-center space-y-3",
+//                                 h3 { class: "font-bold text-lg", "Scrubbing Successful!" }
+//                                 p { "Removed {metadata_removed.len()} metadata entries from ", span { class: "font-mono", "{file_name}" } }
+//                                 button {
+//                                     class: "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition",
+//                                     onclick: move |_| {
+//                                         let scrubbed_name = format!("{}.clean.jpg", file_name.strip_suffix(".jpg").unwrap_or(&file_name));
+//                                         download_bytes(&scrubbed_name, &cleaned_bytes);
+//                                     },
+//                                     "Download Scrubbed File"
+//                                 }
+//                             }
+//                         }
+//                     },
+//                     AppState::Error(err) => {
+//                         rsx! { p { class: "text-red-500", "Error: {err}" } }
+//                     },
+//                 }
+
+//                 // Footer
+//                 p {
+//                     class: "text-center text-xs text-gray-400 pt-4 border-t",
+//                     "All processing is done in your browser. Your files never leave your computer."
+//                 }
+//             }
+//         }
+//     }
+// }
+
+#[component]
 fn app() -> Element {
     // Use signals for reactive state management
     let mut file_bytes = use_signal(|| None::<(String, Vec<u8>)>);
@@ -82,102 +220,119 @@ fn app() -> Element {
 
     rsx! {
         div {
-            class: "min-h-screen bg-gray-100 flex items-center justify-center p-4",
+            class: "min-h-screen bg-gray-900 text-gray-300 flex items-center justify-center p-4 font-mono",
             div {
-                class: "max-w-2xl w-full bg-white rounded-lg shadow-xl p-8 space-y-6",
-                // Header
+                class: "max-w-3xl w-full bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-2xl shadow-green-500/10 p-8 space-y-6",
+
+                // Header with Logo
                 div {
-                    class: "text-center",
-                    h1 { class: "text-4xl font-bold text-gray-800", "ScrubKit" }
-                    p { class: "text-gray-500 mt-2", "View and remove metadata with privacy." }
+                    class: "flex flex-col items-center text-center",
+                    // SVG Logo
+                    svg {
+                        class: "w-24 h-24 mb-4 text-green-400",
+                        "viewBox": "0 0 24 24",
+                        "fill": "none",
+                        "stroke": "currentColor",
+                        "stroke-width": "1",
+                        "stroke-linecap": "round",
+                        "stroke-linejoin": "round",
+                        path { d: "M21 8.5C21 9.92 20.04 11.23 18.71 11.72C18.71 11.72 16 12.5 16 12.5C14.6 12.5 13.5 11.4 13.5 10C13.5 8.6 14.6 7.5 16 7.5C16 7.5 18.71 8.28 18.71 8.28C20.04 8.77 21 10.08 21 11.5Z", stroke: "none", fill: "currentColor" }
+                        path { d: "M3.5 8.5C3.5 9.92 3.96 11.23 5.29 11.72C5.29 11.72 8 12.5 8 12.5C9.4 12.5 10.5 11.4 10.5 10C10.5 8.6 9.4 7.5 8 7.5C8 7.5 5.29 8.28 5.29 8.28C3.96 8.77 3.5 10.08 3.5 11.5Z", stroke: "none", fill: "currentColor" }
+                        path { d: "M12 2L12 22" }
+                        path { d: "M22 12L2 12" }
+                        path { d: "M19 19L5 5" }
+                        path { d: "M5 19L19 5" }
+                    },
+                    h1 { class: "text-5xl font-bold text-gray-100 font-orbitron", "ScrubKit" }
+                    p { class: "text-green-400 mt-2", "[ View and Anonymize File Metadata ]" }
                 }
 
-                // File Input
-                div {
-                    class: "flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-lg",
-                    p { class: "text-gray-600 mb-4", "Select a JPEG file to get started" }
-                    label {
-                        class: "file-input-button",
-                        "Select File"
-                        input {
-                            r#type: "file",
-                            class: "hidden",
-                            accept: ".jpg, .jpeg",
-                            oninput: handle_file_upload,
-                        }
+                // File Input Dropzone
+                label {
+                    class: "flex flex-col items-center justify-center w-full p-6 border-2 border-dashed border-gray-600 hover:border-green-400 rounded-lg cursor-pointer transition-colors",
+                    svg {
+                        class: "w-10 h-10 text-gray-500 mb-3",
+                        "viewBox": "0 0 24 24", "fill": "none", "stroke": "currentColor", "stroke-width": "2", "stroke-linecap": "round", "stroke-linejoin": "round",
+                        path { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" }
+                        polyline { points: "17 8 12 3 7 8" }
+                        line { x1: "12", y1: "3", x2: "12", y2: "15" }
+                    }
+                    p { class: "text-gray-400", "Drag & Drop or ", span { class: "font-semibold text-green-400", "Click to Select File" } }
+                    input {
+                        r#type: "file",
+                        class: "hidden",
+                        accept: ".jpg, .jpeg",
+                        oninput: handle_file_upload,
                     }
                 }
 
                 // Main Content Area
                 match app_state() {
-                    AppState::Idle => {
-                        rsx! { p { class: "text-center text-gray-500", "Your file's metadata will appear here." } }
+                    AppState::Idle => rsx! {
+                        p { class: "text-center text-gray-500 animate-pulse", "Awaiting file..." }
                     },
-                    AppState::Loaded { file_name, metadata } => {
-                        rsx! {
-                            div {
-                                class: "space-y-4",
-                                h3 { class: "text-xl font-semibold text-gray-700", "Metadata for ", span { class: "font-mono", "{file_name}" } }
-                                if metadata.is_empty() {
-                                    p { "No metadata found." }
-                                } else {
-                                    ul {
-                                        class: "list-disc list-inside bg-gray-50 p-4 rounded-md max-h-60 overflow-y-auto",
-                                        for entry in metadata {
-                                            li { class: "font-mono text-sm",
-                                                span { class: "font-semibold", "{entry.key}: " }
-                                                "{entry.value}"
-                                            }
+                    AppState::Loaded { file_name, metadata } => rsx! {
+                        div {
+                            class: "space-y-4",
+                            h3 { class: "text-xl font-semibold text-green-400", ":: Metadata for ", span { class: "font-orbitron", "{file_name}" } }
+                            if metadata.is_empty() {
+                                p { "No metadata found." }
+                            } else {
+                                div {
+                                    class: "bg-gray-900/50 p-4 rounded-md max-h-60 overflow-y-auto border border-gray-700",
+                                    for entry in metadata {
+                                        p { class: "text-sm whitespace-pre-wrap",
+                                            span { class: "text-green-400", "{entry.key}: " }
+                                            span { class: "text-gray-300", "{entry.value}" }
                                         }
                                     }
                                 }
-                                button {
-                                    class: "w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md transition",
-                                    onclick: move |_| {
-                                        if let Some((name, bytes)) = file_bytes() {
-                                            if let Ok(scrubber) = JpegScrubber::new(bytes) {
-                                                if let Ok(result) = scrubber.scrub() {
-                                                    app_state.set(AppState::Scrubbed {
-                                                        file_name: name,
-                                                        cleaned_bytes: result.cleaned_file_bytes,
-                                                        metadata_removed: result.metadata_removed,
-                                                    });
-                                                }
+                            }
+                            button {
+                                class: "w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-md transition-transform hover:scale-105",
+                                onclick: move |_| {
+                                    if let Some((name, bytes)) = file_bytes() {
+                                        if let Ok(scrubber) = JpegScrubber::new(bytes) {
+                                            if let Ok(result) = scrubber.scrub() {
+                                                app_state.set(AppState::Scrubbed {
+                                                    file_name: name,
+                                                    cleaned_bytes: result.cleaned_file_bytes,
+                                                    metadata_removed: result.metadata_removed,
+                                                });
                                             }
                                         }
-                                    },
-                                    "Scrub Metadata"
-                                }
+                                    }
+                                },
+                                "Scrub Metadata"
                             }
                         }
                     },
-                    AppState::Scrubbed { file_name, cleaned_bytes, metadata_removed } => {
-                        rsx! {
-                            div {
-                                class: "p-4 bg-green-100 border border-green-400 text-green-700 rounded-md text-center space-y-3",
-                                h3 { class: "font-bold text-lg", "Scrubbing Successful!" }
-                                p { "Removed {metadata_removed.len()} metadata entries from ", span { class: "font-mono", "{file_name}" } }
-                                button {
-                                    class: "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md transition",
-                                    onclick: move |_| {
-                                        let scrubbed_name = format!("{}.clean.jpg", file_name.strip_suffix(".jpg").unwrap_or(&file_name));
-                                        download_bytes(&scrubbed_name, &cleaned_bytes);
-                                    },
-                                    "Download Scrubbed File"
-                                }
+                    AppState::Scrubbed { file_name, cleaned_bytes, metadata_removed } => rsx! {
+                        div {
+                            class: "p-4 bg-green-900/50 border border-green-500 text-green-300 rounded-md text-center space-y-3",
+                            h3 { class: "font-bold text-lg font-orbitron", "Anonymization Complete" }
+                            p { "Removed {metadata_removed.len()} metadata entries from ", span { class: "font-mono", "{file_name}" } }
+                            button {
+                                class: "w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md transition-transform hover:scale-105",
+                                onclick: move |_| {
+                                    let scrubbed_name = format!("{}.clean.jpg", file_name.strip_suffix(".jpg").unwrap_or(&file_name));
+                                    download_bytes(&scrubbed_name, &cleaned_bytes);
+                                },
+                                "Download Anonymized File"
                             }
                         }
                     },
-                    AppState::Error(err) => {
-                        rsx! { p { class: "text-red-500", "Error: {err}" } }
+                    AppState::Error(err) => rsx! {
+                        p { class: "text-red-400", "Error: {err}" }
                     },
                 }
 
                 // Footer
                 p {
-                    class: "text-center text-xs text-gray-400 pt-4 border-t",
-                    "All processing is done in your browser. Your files never leave your computer."
+                    class: "text-center text-xs text-gray-500 pt-4 border-t border-gray-700",
+                    "All processing is done client-side. Your files never leave your computer."
                 }
+
             }
         }
     }
