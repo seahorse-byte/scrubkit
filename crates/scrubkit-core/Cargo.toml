@@ -7,8 +7,8 @@ description = "A modern, privacy-first metadata scrubber built with Rust."
 license = "MIT"
 repository = "https://github.com/seahorse-byte/scrubkit.git"
 homepage = "https://github.com/seahorse-byte/scrubkit.git"
-readme = "README.md"
-keywords = ["exif", "metadata", "privacy", "scrubber", "cli"]
+readme = "../../README.md"
+keywords = ["exif", "metadata", "privacy", "scrubber"]
 categories = ["command-line-utilities", "privacy"]
 
 [dependencies]
