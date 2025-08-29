@@ -9,7 +9,7 @@ repository = "https://github.com/seahorse-byte/scrubkit.git"
 homepage = "https://github.com/seahorse-byte/scrubkit.git"
 readme = "../../README.md"
 keywords = ["exif", "metadata", "privacy", "scrubber"]
-categories = ["command-line-utilities", "privacy"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 thiserror = "1.0"

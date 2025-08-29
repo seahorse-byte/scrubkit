@@ -9,7 +9,7 @@ repository = "https://github.com/seahorse-byte/scrubkit.git"
 homepage = "https://github.com/seahorse-byte/scrubkit.git"
 readme = "../../README.md"
 keywords = ["exif", "metadata", "privacy", "scrubber", "cli"]
-categories = ["command-line-utilities", "privacy"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 # Our core logic library
