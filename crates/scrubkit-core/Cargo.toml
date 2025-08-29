@@ -1,8 +1,8 @@
 [package]
 name = "scrubkit-core"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
-authors = ["Olsi Gjeci <olsi.developer@gamil.com>"]
+authors = ["Olsi Gjeci <olsigjeci@proton.me>"]
 description = "A modern, privacy-first metadata scrubber built with Rust."
 license = "MIT"
 repository = "https://github.com/seahorse-byte/scrubkit.git"

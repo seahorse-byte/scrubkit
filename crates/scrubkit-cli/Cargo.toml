@@ -1,8 +1,8 @@
 [package]
 name = "scrubkit"                                                          # or "scrubkit-core"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
-authors = ["Olsi Gjeci <olsi.developer@gamil.com>"]
+authors = ["Olsi Gjeci <olsigjeci@proton.me>"]
 description = "A modern, privacy-first metadata scrubber built with Rust."
 license = "MIT"
 repository = "https://github.com/seahorse-byte/scrubkit.git"
@@ -13,7 +13,7 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 # Our core logic library
-scrubkit-core = { path = "../scrubkit-core", version = "0.1.1" }
+scrubkit-core = { path = "../scrubkit-core", version = "0.1.2" }
 # For building the command-line interface
 clap = { version = "4.5.4", features = ["derive"] }
 # For easy and robust error handling
