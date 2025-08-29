@@ -13,7 +13,7 @@ categories = ["command-line-utilities"]
 
 [dependencies]
 # Our core logic library
-scrubkit-core = { path = "../scrubkit-core" }
+scrubkit-core = { path = "../scrubkit-core", version = "0.1.1" }
 # For building the command-line interface
 clap = { version = "4.5.4", features = ["derive"] }
 # For easy and robust error handling
