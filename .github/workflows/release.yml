@@ -35,7 +35,7 @@ jobs:
         include:
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
-          - target: x86_64-apple-darwin # <-- FIX: Corrected from x88_64
+          - target: x86_64-apple-darwin
             os: macos-latest
           - target: x86_64-pc-windows-msvc
             os: windows-latest
@@ -43,6 +43,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions-rust-lang/setup-rust-toolchain@v1
+
+      - name: Install target
+        run: rustup target add ${{ matrix.target }}
 
       - name: Build CLI
         run: cargo build --release --bin scrubkit --target ${{ matrix.target }}
@@ -81,6 +84,3 @@ jobs:
       - name: Publish scrubkit
         # Publish the "scrubkit" package
         run: sleep 30 && cargo publish -p scrubkit --token ${{ secrets.CARGO_API_TOKEN }}
-
-
-        
