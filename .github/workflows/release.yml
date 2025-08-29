@@ -6,10 +6,8 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+' # Trigger on tags like v0.1.0
 
-# Add this block to grant write permissions
 permissions:
   contents: write
-
 
 jobs:
   create-release:
@@ -37,7 +35,7 @@ jobs:
         include:
           - target: x86_64-unknown-linux-gnu
             os: ubuntu-latest
-          - target: x88_64-apple-darwin
+          - target: x86_64-apple-darwin # <-- FIX: Corrected from x88_64
             os: macos-latest
           - target: x86_64-pc-windows-msvc
             os: windows-latest
@@ -47,13 +45,11 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
 
       - name: Build CLI
-        # Use the new binary name "scrubkit"
         run: cargo build --release --bin scrubkit --target ${{ matrix.target }}
 
       - name: Package for Release
         shell: bash
         run: |
-          # Use the new binary name "scrubkit"
           BINARY_NAME="scrubkit"
           if [ "${{ matrix.os }}" = "windows-latest" ]; then
             BINARY_NAME="scrubkit.exe"
@@ -85,3 +81,6 @@ jobs:
       - name: Publish scrubkit
         # Publish the "scrubkit" package
         run: sleep 30 && cargo publish -p scrubkit --token ${{ secrets.CARGO_API_TOKEN }}
+
+
+        
