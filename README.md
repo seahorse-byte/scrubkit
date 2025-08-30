@@ -4,6 +4,9 @@
 <p><strong>[ Anonymize Your Digital Footprint ]</strong></p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/68c9ce0b-fc28-42b5-bfa7-d2c4f2e51680/deploy-status)](https://app.netlify.com/projects/scrubkit/deploys) [![Latest Release](https://img.shields.io/github/v/release/seahorse-byte/scrubkit)](https://github.com/seahorse-byte/scrubkit/releases/latest)
+<a href="https://crates.io/crates/scrubkit">
+  <img src="https://img.shields.io/crates/v/scrubkit?style=for-the-badge&color=f59e0b&logo=rust" alt="Crates.io" height="20">
+</a>
 
 </div>
 
