@@ -83,9 +83,9 @@ fn app() -> Element {
 
     rsx! {
         div {
-            class: "min-h-screen bg-gray-900 text-gray-300 flex items-center justify-center p-4 font-mono",
+            class: "h-screen flex flex-col bg-gray-900 text-gray-300 flex items-center justify-center p-4 font-mono",
             div {
-                class: "max-w-3xl w-full bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-2xl shadow-green-500/10 p-8 space-y-6",
+                class: "max-w-3xl w-full bg-gray-800/50 backdrop-blur-sm border border-green-500/20 rounded-lg shadow-2xl shadow-green-500/10 p-8 space-y-6 mt-10",
 
                 // Header with Logo
                 div {
@@ -191,12 +191,24 @@ fn app() -> Element {
                     },
                 }
 
-                // Footer
                 p {
                     class: "text-center text-xs text-gray-500 pt-4 border-t border-gray-700",
                     "All processing is done client-side. Your files never leave your computer."
                 }
 
+            }
+            footer {
+                class: "w-full text-center relative",
+                p {
+                    class: "text-xs text-gray-500 absolute top-10 left-0 right-0 bottom-0",
+                    "Built with ❤️ by ",
+                    a {
+                        class: "text-green-400 hover:text-green-300",
+                        href: "https://github.com/seahorse-byte",
+                        target: "_blank",
+                        "Olsi Gjeci"
+                    }
+                }
             }
         }
     }
