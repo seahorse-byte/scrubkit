@@ -16,7 +16,7 @@
 
 
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/68c9ce0b-fc28-42b5-bfa7-d2c4f2e51680/deploy-status)](https://app.netlify.com/projects/scrubkit/deploys) [![Latest Release](https://img.shields.io/github/v/release/seahorse-byte/scrubkit)](https://github.com/seahorse-byte/scrubkit/releases/latest)
 
 🛡️ Mission
 ScrubKit is a modern, privacy-first tool designed to inspect and remove potentially sensitive metadata from your files. In a world where data privacy is paramount, ScrubKit provides a secure, transparent, and powerful way to ensure your files don't share more than you intend.
