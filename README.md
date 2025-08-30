@@ -1,9 +1,7 @@
 <div align="center">
-<img src="./assets/logo.svg" alt="ScrubKit Logo" width="150" height="150">
+<img src="/crates/scrubkit-web/assets/logo.svg" alt="ScrubKit Logo" width="150" height="150">
 <h1 style="font-family: 'Orbitron', sans-serif; font-size: 3rem;">ScrubKit</h1>
-    <p><strong>[ Anonymize Your Digital Footprint ]</strong></p>
-<>
-
+<p><strong>[ Anonymize Your Digital Footprint ]</strong></p>
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/68c9ce0b-fc28-42b5-bfa7-d2c4f2e51680/deploy-status)](https://app.netlify.com/projects/scrubkit/deploys) [![Latest Release](https://img.shields.io/github/v/release/seahorse-byte/scrubkit)](https://github.com/seahorse-byte/scrubkit/releases/latest)
 
