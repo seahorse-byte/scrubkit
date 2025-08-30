@@ -1,22 +1,13 @@
 <div align="center">
-    <svg width="150" height="150" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M2 7L12 12L22 7" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M12 22V12" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M17 4.5L7 9.5" stroke="#4ade80" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-    <path d="M20 7L10 12" stroke="#4ade80" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
-    <!-- Anonymize Symbol -->
-    <circle cx="12" cy="12" r="3" fill="#f87171" opacity="0.8"/>
-    <path d="M10.5 13.5L13.5 10.5" stroke="#111827" stroke-width="1.5" stroke-linecap="round"/>
-    </svg>
-    <h1>ScrubKit</h1>
-    <p><strong>[ View and Anonymize File Metadata with Privacy ]</strong></p>
-
-</div>
-
+<img src="./assets/logo.svg" alt="ScrubKit Logo" width="150" height="150">
+<h1 style="font-family: 'Orbitron', sans-serif; font-size: 3rem;">ScrubKit</h1>
+    <p><strong>[ Anonymize Your Digital Footprint ]</strong></p>
+<>
 
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/68c9ce0b-fc28-42b5-bfa7-d2c4f2e51680/deploy-status)](https://app.netlify.com/projects/scrubkit/deploys) [![Latest Release](https://img.shields.io/github/v/release/seahorse-byte/scrubkit)](https://github.com/seahorse-byte/scrubkit/releases/latest)
+
+</div>
 
 🛡️ Mission
 ScrubKit is a modern, privacy-first tool designed to inspect and remove potentially sensitive metadata from your files. In a world where data privacy is paramount, ScrubKit provides a secure, transparent, and powerful way to ensure your files don't share more than you intend.
